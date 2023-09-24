@@ -1,0 +1,50 @@
+{
+  "Actor": {
+    "types": ["pc", "npc", "enemy"],
+    "templates": {
+      "resources": {
+        "health": {
+          "min": 0,
+          "value": 6,
+          "max": 6
+        },
+        "energy": {
+          "min": 0,
+          "value": 3,
+          "max": 3
+        }
+      }
+    },
+    "pc": {
+      "templates": ["resources"]
+    },
+    "npc": {
+      "templates": ["resources"]
+    },
+    "enemy": {
+      "templates": ["resources"]
+    }
+  },
+  "Item": {
+    "types": ["weapon", "armor", "gear", "power"],
+    "templates": {
+      "basics": {
+        "value": 5,
+        "quantity": 1
+      }
+    },
+    "weapon": {
+      "temaplates": ["basic"]
+    },
+    "armor": {
+      "temaplates": ["basic"]
+    },
+    "gear": {
+      "temaplates": ["basic"]
+    },
+    "power": {
+      "temaplates": ["basic"]
+    }
+  }
+}
+
