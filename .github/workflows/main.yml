@@ -45,7 +45,7 @@ env:
 
   # The URL to the system archive associated with the system release being
   # processed by this workflow.
-  release_module_url: "https://github.com/${{github.repository}}/releases/download/${{github.event.release.tag_name}}/system.zip"
+  release_system_url: "https://github.com/${{github.repository}}/releases/download/${{github.event.release.tag_name}}/system.zip"
 
 
 on:
