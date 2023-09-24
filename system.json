@@ -1,6 +1,6 @@
 {
-  "id": "system",
-  "title": "New System",
+  "id": "lumen",
+  "title": "LUMEN",
   "description": "",
   "version": "#{VERSION}#",
   "library": "false",
@@ -26,7 +26,7 @@
   "scripts": [
   ],
   "styles": [
-    "https://unpkg.com/chota@latest",
+    "https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css",
     "styles/module.css"
   ],
   "languages": [
