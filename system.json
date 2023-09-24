@@ -24,9 +24,10 @@
     "scripts/LumenSystem.mjs"
   ],
   "scripts": [
+    "https://unpkg.com/@blaze/atoms@13.1.0/dist/blaze-atoms/blaze-atoms.js"
   ],
   "styles": [
-    "https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css",
+    "https://unpkg.com/@blaze/css@12.2.0/dist/blaze/blaze.css",
     "styles/module.css"
   ],
   "languages": [

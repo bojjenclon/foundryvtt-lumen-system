@@ -1,10 +1,19 @@
 <form class="{{cssClass}}" autocomplete="off">
-  <nav class="tabs is-full">
-    <a class="active">Tab 1</a>
-    <a>Tab 2</a>
-    <a>Tab 3</a>
+  <nav role="tablist" class="c-tabs">
+    <div class="c-tabs__nav">
+      <div class="c-tabs__headings">
+        <button role="tab" class="c-tab-heading c-tab-heading--active">Tab 1</button>
+        <button role="tab" class="c-tab-heading">Tab 2</button>
+        <button role="tab" class="c-tab-heading">Tab 3</button>
+      </div>
+    </div>
   </nav>
-  <div class="card">
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam rhoncus orci purus, ut gravida odio.</p>
+
+  <div role="tabpanel" class="c-tabs__tab">
+    <div class="c-card">
+      <div class="c-card__body">
+        <p class="c-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam rhoncus orci purus, ut gravida odio.</p>
+      </div>
+    </div>
   </div>
 </form>
