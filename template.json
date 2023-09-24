@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["pc", "npc", "enemy"],
+    "types": ["hero", "character", "enemy"],
     "templates": {
       "resources": {
         "health": {
@@ -15,10 +15,10 @@
         }
       }
     },
-    "pc": {
+    "hero": {
       "templates": ["resources"]
     },
-    "npc": {
+    "character": {
       "templates": ["resources"]
     },
     "enemy": {

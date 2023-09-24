@@ -21,12 +21,12 @@
     "requires": []
   },
   "esmodules": [
-    "scripts/module.js"
+    "scripts/LumenSystem.mjs"
   ],
   "scripts": [
-    "scripts/lib/lib.js"
   ],
   "styles": [
+    "https://unpkg.com/chota@latest",
     "styles/module.css"
   ],
   "languages": [
