@@ -2,12 +2,10 @@
   "id": "lumen",
   "title": "LUMEN",
   "description": "",
-  "version": "#{VERSION}#",
-  "library": "false",
-  "manifestPlusVersion": "1.2.0",
+  "version": "0.0.1",
   "compatibility": {
     "minimum": 10,
-    "verified": 10,
+    "verified": 11,
     "maximum": 11
   },
   "authors": [
@@ -16,10 +14,6 @@
       "url": "https://github.com/bojjenclon"
     }
   ],
-  "relationships": {
-    "systems": [],
-    "requires": []
-  },
   "esmodules": [
     "scripts/LumenSystem.mjs"
   ],
@@ -37,11 +31,7 @@
       "path": "languages/en.json"
     }
   ],
-  "packs": [],
   "socket": true,
-  "url": "#{URL}#",
-  "manifest": "#{MANIFEST}#",
-  "download": "#{DOWNLOAD}#",
   "license": "LICENSE",
   "readme": "README.md",
   "gridDistance": 5,
@@ -49,4 +39,3 @@
   "primaryTokenAttribute": "resources.health",
   "secondaryTokenAttribute": "resources.energy"
 }
-

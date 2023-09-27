@@ -1,0 +1,157 @@
+:root {
+  --avatar-background: none;
+  --toggle-track-color--unchecked: #676767;
+}
+
+img.c-avatar__img {
+  border: none;
+}
+
+.hero-tabs button.c-tab-heading[role="tab"] {
+  margin: 0 2px;
+}
+
+button.c-tab-heading:hover,
+button.c-tab-heading:focus {
+  box-shadow: none;
+}
+
+button.c-tab-heading:not(.c-tab-heading--active):not(:hover),
+button.c-tab-heading:not(.c-tab-heading--active):not(:focus) {
+  background: color-mix(in srgb, var(--tab-heading-background--active), transparent 66%);
+}
+
+input[type="text"].u-medium,
+input[type="number"].u-medium {
+  font-size: var(--text-font-size-medium);
+}
+
+input[type="text"].u-large,
+input[type="number"].u-large {
+  font-size: var(--text-font-size-large);
+}
+
+input[type="text"].u-xlarge,
+input[type="number"].u-xlarge {
+  font-size: var(--text-font-size-xlarge);
+}
+
+.c-heading.padding-small {
+  padding-top: 0.2rem;
+  padding-bottom: 0.4rem;
+}
+
+.u-flex-0 {
+  flex: 0;
+}
+
+.u-flex-1\/4 {
+  flex: 0.25;
+}
+
+.u-flex-1\/2 {
+  flex: 0.5;
+}
+
+.u-flex-1 {
+  flex: 1;
+}
+
+.u-flex-column {
+  flex-direction: column;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.items-end {
+  align-items: flex-end;
+}
+
+.p-2,
+input.p-2 {
+  padding: 0.5rem;
+}
+
+.pl-4 {
+  padding-left: 1rem;
+}
+
+.pb-2 {
+  padding-bottom: 0.5rem;
+}
+
+.pb-4 {
+  padding-bottom: 1rem;
+}
+
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.mb-2 {
+  padding-bottom: 0.5rem;
+}
+
+.mr-2 {
+  padding-right: 0.5rem;
+}
+
+.m-2 {
+  padding: 0.5rem;
+}
+
+.w-1\/2,
+input.w-1\/2 {
+  width: 50%;
+}
+
+.w-1\/4,
+input.w-1\/4 {
+  width: 25%;
+}
+
+.w-3\/4,
+input.w-3\/4 {
+  width: 75%;
+}
+
+.align-left,
+input.align-left {
+  text-align: left;
+}
+
+.align-center,
+input.align-center {
+  text-align: center;
+}
+
+.align-right,
+input.align-right {
+  text-align: right;
+}
+
+.illuminated-by-lumen {
+  background-image: url('../assets/images/illuminated-lumen-logo-black.png');
+  background-position: right;
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  height: 100%;
+  width: auto;
+}
+
+.notes {
+  max-height: 24rem;
+  overflow: auto;
+}

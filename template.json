@@ -8,15 +8,27 @@
           "value": 6,
           "max": 6
         },
+        "shield": {
+          "min": 0,
+          "value": 0,
+          "max": 10
+        },
         "energy": {
           "min": 0,
           "value": 3,
           "max": 3
+        },
+        "approaches": {
+          "force": 1,
+          "flow": 1,
+          "focus": 1
         }
       }
     },
     "hero": {
-      "templates": ["resources"]
+      "templates": ["resources", "approaches"],
+      "notes": "",
+      "tab": 0
     },
     "character": {
       "templates": ["resources"]
@@ -26,25 +38,34 @@
     }
   },
   "Item": {
-    "types": ["weapon", "armor", "gear", "power"],
+    "types": ["weapon", "gear", "power", "tag"],
     "templates": {
       "basics": {
         "value": 5,
-        "quantity": 1
+        "quantity": 1,
+        "description": ""
+      },
+      "hasRange": {
+        "range": {
+          "near": false,
+          "mid": false,
+          "far": false
+        }
       }
     },
     "weapon": {
-      "temaplates": ["basic"]
-    },
-    "armor": {
-      "temaplates": ["basic"]
+      "templates": ["basic", "hasRange"],
+      "harm": 1
     },
     "gear": {
-      "temaplates": ["basic"]
+      "templates": ["basic"]
     },
     "power": {
-      "temaplates": ["basic"]
+      "templates": [],
+      "passive": false
+    },
+    "tag": {
+      "templates": []
     }
   }
 }
-

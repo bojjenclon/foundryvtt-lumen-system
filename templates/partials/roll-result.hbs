@@ -1,0 +1,22 @@
+<div class="lumen roll roll-result">
+  <h1 class="c-heading u-large">
+    <div class="o-grid">
+      <div class="o-grid__cell align-left">
+        {{resultText}}
+      </div>
+      <div class="o-grid__cell align-right">
+        {{highestValue}}
+      </div>
+    </div>
+  <h1>
+</div>
+
+<div class="lumen dice-breakdown u-display-flex justify-center">
+  {{#each dice as |die|}}
+  <span class="mr-2">
+    <span class="c-tooltip c-tooltip--top" aria-label="{{die.result}}">
+      <i class="fas fa-2x {{face die.result}} " style="color: {{dieColor ../highestIdx @index}};"></i>
+    </span>
+  </span>
+  {{/each}}
+</div>

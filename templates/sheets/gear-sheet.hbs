@@ -1,0 +1,49 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <div class="u-display-flex pb-2">
+    <div class="u-flex-0">
+      <div class="c-avatar u-super">
+        <img class="c-avatar__img" data-edit="img" alt="{{item.name}}" src="{{item.img}}" />
+      </div>
+    </div>
+
+    <div class="u-flex-1 u-display-flex u-flex-column pl-4 mb-2">
+      <div class="u-flex-1 illuminated-by-lumen"></div>
+      <input class="c-field u-xlarge" type="text" name="name" value="{{item.name}}" />
+    </div> 
+  </div>
+
+  <div class="c-divider c-divider--solid pb-2">
+    <div class="c-divider__content">
+      Data
+    </div>
+  </div>
+  
+  <div class="o-grid pb-2">
+    <div class="o-grid__cell">
+      <div class="u-heading u-large">Value</div>
+    </div>
+    <div class="o-grid__cell u-display-flex justify-end">
+      <input name="system.value" type="number" class="c-field u-large align-right" value="{{data.system.value}}" min="0" step="1" />
+    </div>
+  </div>
+
+  <div class="o-grid pb-4">
+    <div class="o-grid__cell">
+      <div class="u-heading u-large">Quantity</div>
+    </div>
+    <div class="o-grid__cell u-display-flex justify-end">
+      <input name="system.quantity" type="number" class="c-field u-large align-right" value="{{data.system.quantity}}" min="0" step="1" />
+    </div>
+  </div>
+  
+  <div class="c-divider c-divider--solid">
+    <div class="c-divider__content">
+      Description
+    </div>
+  </div>
+
+  <div class="m-2">
+    <textarea class="c-field" name="system.description" rows="4">{{data.system.description}}</textarea>
+  </div>
+</form>
+

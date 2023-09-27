@@ -1,19 +1,262 @@
 <form class="{{cssClass}}" autocomplete="off">
-  <nav role="tablist" class="c-tabs">
+  <div class="u-display-flex pb-4">
+    <div class="u-flex-0">
+      <div class="c-avatar u-super">
+        <img class="c-avatar__img" data-edit="img" alt="{{actor.name}}" src="{{actor.img}}" />
+      </div>
+    </div>
+
+    <div class="u-flex-1 u-display-flex u-flex-column pl-4 mb-2">
+      <div class="u-flex-1 illuminated-by-lumen"></div>
+      <input class="c-field u-xlarge" type="text" name="name" value="{{actor.name}}" />
+    </div> 
+  </div>
+
+  <nav role="tablist" class="hero-tabs c-tabs">
     <div class="c-tabs__nav">
       <div class="c-tabs__headings">
-        <button role="tab" class="c-tab-heading c-tab-heading--active">Tab 1</button>
-        <button role="tab" class="c-tab-heading">Tab 2</button>
-        <button role="tab" class="c-tab-heading">Tab 3</button>
+        {{{blazeTab "Core" 0 data.system.tab}}}
+        {{{blazeTab "Powers" 1 data.system.tab}}}
+        {{{blazeTab "Items" 2 data.system.tab}}}
+        {{{blazeTab "Rules" 3 data.system.tab}}}
       </div>
     </div>
   </nav>
 
-  <div role="tabpanel" class="c-tabs__tab">
-    <div class="c-card">
-      <div class="c-card__body">
-        <p class="c-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam rhoncus orci purus, ut gravida odio.</p>
+  {{#if (eq data.system.tab 0)}}
+  <div role="tabpanel" class="c-tabs__tab u-display-flex u-flex-column u-flex-1">
+    <div class="c-divider c-divider--solid pb-2">
+      <div class="c-divider__content">
+        Rolls
+      </div>
+    </div>
+
+    <div class="o-grid pb-2">
+      <div class="o-grid__cell">
+        <span class="c-tooltip c-tooltip--top" aria-label="Roll with Force">
+          <button class="roll-force c-button c-button--error">
+            <i class="fa-solid fa-dice-d20"></i>
+            <span>Force</span>
+          </button>
+        </span>
+      </div>
+
+      <div class="o-grid__cell">
+        <span class="c-tooltip c-tooltip--top" aria-label="Roll with Flow">
+          <button class="roll-flow c-button c-button--success">
+            <i class="fa-solid fa-dice-d20"></i>
+            <span>Flow</span>
+          </button>
+        </span> 
+      </div>
+
+      <div class="o-grid__cell">
+        <span class="c-tooltip c-tooltip--top" aria-label="Roll with Focus">
+          <button class="roll-focus c-button c-button--info">
+            <i class="fa-solid fa-dice-d20"></i>
+            <span>Focus</span>
+          </button>
+        </span> 
+      </div>
+    </div>
+
+    <div class="o-grid pb-4">
+      <div class="o-grid__cell">
+        <input
+          type="number"
+          class="c-input u-large align-right p-2"
+          name="system.force"
+          value="{{data.system.force}}"
+          min="0"
+          max="6"
+          step="1"
+        />
+      </div>
+
+      <div class="o-grid__cell">
+        <input
+          type="number"
+          class="c-input u-large align-right p-2"
+          name="system.flow"
+          value="{{data.system.flow}}"
+          min="0"
+          max="6"
+          step="1"
+        />
+      </div>
+
+      <div class="o-grid__cell">
+        <input
+          type="number"
+          class="c-input u-large align-right p-2"
+          name="system.focus"
+          value="{{data.system.focus}}"
+          min="0"
+          max="6"
+          step="1"
+        />
+      </div>
+    </div>
+
+    <div class="c-divider c-divider--solid pb-2">
+      <div class="c-divider__content">
+        Stats
+      </div>
+    </div>
+
+    <div class="c-table pb-4">
+      <div class="c-table__row">
+        <span class="c-table__cell">
+          <span class="c-heading u-xlarge padding-small">Health</span>
+        </span>
+        <span class="c-table__cell u-flex justify-end items-center">
+          <div class="c-input-group u-flex-1/2">
+            <div class="o-field">
+              <input
+                name="system.health.value"
+                value="{{data.system.health.value}}"
+                class="c-input u-large align-right"
+                type="number"
+                min="0"
+                max="{{data.system.health.max}}"
+                step="1"
+              />
+            </div>
+            <div class="o-field o-field--fixed px-2 u-display-flex u-flex-column justify-center">
+              <span>/</span>
+            </div>
+            <div class="o-field">
+              <input
+                name="system.health.max"
+                value="{{data.system.health.max}}"
+                class="c-input u-large align-right"
+                type="number"
+                min="0"
+                max="99"
+                step="1"
+              />
+            </div>
+          </div>
+        </span>
+      </div>
+      
+      {{#if data.system.supportShields}}
+      <div class="c-table__row">
+        <span class="c-table__cell">
+          <span class="c-heading u-xlarge padding-small">Shields</span>
+        </span>
+        <span class="c-table__cell u-flex justify-end items-center">
+          <div class="c-input-group u-flex-1/2">
+            <div class="o-field">
+              <input
+                name="system.shield.value"
+                value="{{data.system.shield.value}}"
+                class="c-input u-large align-right"
+                type="number"
+                min="0"
+                max="{{data.system.shield.max}}"
+                step="1"
+              />
+            </div>
+            <div class="o-field o-field--fixed px-2 u-display-flex u-flex-column justify-center">
+              <span>/</span>
+            </div>
+            <div class="o-field">
+              <input
+                name="system.shield.max"
+                value="{{data.system.shield.max}}"
+                class="c-input u-large align-right"
+                type="number"
+                min="0"
+                max="99"
+                step="1"
+              />
+            </div>
+          </div>
+        </span>
+      </div>
+      {{/if}}
+
+      <div class="c-table__row">
+        <span class="c-table__cell">
+          <span class="c-heading u-xlarge padding-small">Energy</span>
+        </span>
+        <span class="c-table__cell u-flex justify-end items-center">
+          <div class="c-input-group u-flex-1/2">
+            <div class="o-field">
+              <input
+                name="system.energy.value"
+                value="{{data.system.energy.value}}"
+                class="c-input u-large align-right"
+                type="number"
+                min="0"
+                max="{{data.system.energy.max}}"
+                step="1"
+              />
+            </div>
+            <div class="o-field o-field--fixed px-2 u-display-flex u-flex-column justify-center">
+              <span>/</span>
+            </div>
+            <div class="o-field">
+              <input
+                name="system.energy.max"
+                value="{{data.system.energy.max}}"
+                class="c-input u-large align-right"
+                type="number"
+                min="0"
+                max="99"
+                step="1"
+              />
+            </div>
+          </div>
+        </span>
+      </div>
+    </div>
+    
+    <div class="c-divider c-divider--solid pb-2">
+      <div class="c-divider__content">
+        Notes
+      </div>
+    </div>
+
+    <div class="notes pb-4">
+      {{{notesHTML}}}
+    </div>
+
+    <div class="note-actions">
+      <div class="o-grid">
+        <div class="o-grid__cell o-grid__cell--width-20 o-grid__cell--offset-80">
+          <button type="button" class="edit-notes c-button u-medium">
+            <i class="fa-solid fa-pencil fa-sm"></i>
+            <span>Edit</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
+  {{/if}}
+
+  {{#if (eq data.system.tab 1)}}
+  <div role="tabpanel" class="c-tabs__tab">
+    {{#each data.system.powers as |power|}}
+      <span>{{power.name}}</span>
+    {{/each}}
+  </div>
+  {{/if}}
+
+  {{#if (eq data.system.tab 2)}}
+  <div role="tabpanel" class="c-tabs__tab">
+    <p class="c-paragraph">
+      Curabitur pellentesque suscipit ex, ac aliquet tortor faucibus et. Maecenas tincidunt augue a enim viverra, vitae rhoncus nunc vulputate. Cras euismod ut ante ac sollicitudin. Nam eleifend nunc nec neque consequat, eu condimentum purus placerat. Cras consectetur at ante a pellentesque. Maecenas consectetur vestibulum consequat. Aenean suscipit cursus efficitur. Quisque tincidunt massa tellus, vel lobortis diam bibendum ut. Curabitur sodales ornare est in efficitur. Nulla sagittis dignissim tellus, et ullamcorper mi aliquam cursus. Morbi tortor lacus, consequat mollis erat in, rhoncus vulputate erat. Suspendisse ut urna at risus aliquam posuere.
+    </p>
+  </div>
+  {{/if}}
+
+  {{#if (eq data.system.tab 3)}}
+  <div role="tabpanel" class="c-tabs__tab">
+    <p class="c-paragraph">
+      Phasellus dictum augue id odio placerat, ut luctus ligula convallis. Ut purus elit, aliquam vel venenatis vitae, dapibus at nulla. Duis sed commodo eros, ut vulputate est. Praesent id odio lorem. Suspendisse sagittis vestibulum eros quis imperdiet. Sed nulla eros, porta ut libero eget, consectetur congue lectus. Donec porttitor lacus nec est efficitur tincidunt. Praesent viverra vulputate est feugiat consequat. Sed fermentum leo vel massa semper bibendum. Nam bibendum placerat libero, id rhoncus diam pulvinar vitae. Etiam ac nisi id lorem scelerisque sodales. Mauris ultrices viverra nulla non pharetra. Donec non vulputate lectus. Ut at diam ac mi eleifend cursus at a erat. Suspendisse finibus, diam porta finibus rutrum, nulla enim pretium diam, sed interdum ex neque vel tellus. Duis gravida eleifend consequat.
+    </p>
+  </div>
+  {{/if}}
 </form>
