@@ -276,7 +276,7 @@
               <span>{{power.system.cost}}</span>
             </div>
             <div class="o-grid__cell o-grid__cell--width-fixed" style="width: 5rem;">
-              <button class="use-power c-button c-button--success u-small u-text--loud" data-cost="{{power.system.cost}}" {{#if (lt ../data.system.energy.value power.system.cost)}}disabled{{/if}}>
+              <button class="use-power c-button c-button--success u-small u-text--loud" data-name="{{power.name}}" data-cost="{{power.system.cost}}" {{#if (lt ../data.system.energy.value power.system.cost)}}disabled{{/if}}>
                 Use
               </button>
             </div>

@@ -218,10 +218,23 @@ export default class LumenHeroSheet extends ActorSheet {
         evt.preventDefault()
         
         const el = evt.currentTarget
+        const powerName = el.dataset.name
         const powerCost = el.dataset.cost
         const energy = actor.system.energy.value
         
         if (energy >= powerCost) {
+          ChatMessage.create({
+            content: [
+             `<p class="u-paragraph align-center">`,
+              `<i class="fa-solid fa-bolt"></i> `,
+              `<span class="u-text--loud">${actor.name}</span> `,
+              `burns ${powerCost} Energy to use `,
+              `<span class="u-text--loud">${powerName}</span>! `,
+              `<i class="fa-solid fa-bolt"></i>`,
+             `</p>` 
+            ].join('')
+          })
+
           actor.update({ 'system.energy.value': (energy - powerCost) })
         }
       })
