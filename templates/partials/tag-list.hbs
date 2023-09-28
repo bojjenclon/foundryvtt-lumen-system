@@ -1,0 +1,18 @@
+<table class="c-table">
+  <thead class="c-table__head">
+    <tr class="c-table__row c-table__row--heading">
+      <th class="c-table__cell">Name</th>
+      <th class="c-table__cell">Description</th>
+    </tr>
+  </thead>
+  
+  <tbody class="c-table__body">
+    {{#each tags as |tag|}}
+    <tr class="c-table__row">
+      <td class="c-table__cell">{{tag.name}}</td>
+      <td class="c-table__cell">{{tag.system.description}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+

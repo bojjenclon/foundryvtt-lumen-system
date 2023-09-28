@@ -63,6 +63,10 @@ export default class LumenHeroSheet extends ActorSheet {
       case 2:
         this.itemsTabListeners(html)
         break;
+
+      case 3:
+        this.referencesTabListeners(html)
+        break;
     
       default:
         break;
@@ -305,6 +309,26 @@ export default class LumenHeroSheet extends ActorSheet {
         if (tagItem) {
           tagItem.sheet.render(true)
         }
+      })
+  }
+  
+  referencesTabListeners(html) {
+    html
+      .find('.tag-list')
+      .click(async (evt) => {
+        evt.preventDefault()
+        
+        const tags = game.items
+          .filter(gi => gi.type === 'tag')
+          .sort((a, b) => a.name.localeCompare(b.name))
+        
+        var tagListDialog = new Dialog({
+          title: 'Tag List',
+          content: await renderTemplate('systems/lumen/templates/partials/tag-list.hbs', { tags }),
+          buttons: [],
+          resizable: true
+        })
+        tagListDialog.render(true)
       })
   }
 }
