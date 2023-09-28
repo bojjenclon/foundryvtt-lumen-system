@@ -25,7 +25,7 @@
 
   {{#if (eq data.system.tab 0)}}
   <div role="tabpanel" class="c-tabs__tab u-display-flex u-flex-column u-flex-1">
-    <div class="c-divider c-divider--solid pb-2">
+    <div class="c-divider c-divider--solid mb-2">
       <div class="c-divider__content">
         Rolls
       </div>
@@ -98,7 +98,7 @@
       </div>
     </div>
 
-    <div class="c-divider c-divider--solid pb-2">
+    <div class="c-divider c-divider--solid mb-2">
       <div class="c-divider__content">
         Stats
       </div>
@@ -213,7 +213,7 @@
       </div>
     </div>
     
-    <div class="c-divider c-divider--solid pb-2">
+    <div class="c-divider c-divider--solid mb-2">
       <div class="c-divider__content">
         Notes
       </div>
@@ -239,60 +239,204 @@
   {{#if (eq data.system.tab 1)}}
   <div role="tabpanel" class="c-tabs__tab">
     {{#each data.system.powers as |power|}}
-      <div class="c-card u-text">
-        <header class="c-card__header">
-          <div class="o-grid">
-            <div class="o-grid__cell align-left">
-              {{#if power.system.passive}}
-              <span class="u-text--quiet c-tooltip c-tooltip--bottom" aria-label="Passive">
-                <i class="fa-solid fa-moon pr-1"></i>
-              </span>
-              {{^}}
-              <span class="u-text--quiet c-tooltip c-tooltip--bottom" aria-label="Active">
-                <i class="fa-solid fa-sun pr-1"></i>
-              </span>
-              {{/if}}
+    <div class="c-card u-text">
+      <header class="c-card__header">
+        <div class="o-grid">
+          <div class="o-grid__cell align-left">
+            {{#if power.system.passive}}
+            <span class="u-text--quiet c-tooltip c-tooltip--bottom" aria-label="Passive">
+              <i class="fa-solid fa-moon pr-1"></i>
+            </span>
+            {{^}}
+            <span class="u-text--quiet c-tooltip c-tooltip--bottom" aria-label="Active">
+              <i class="fa-solid fa-sun pr-1"></i>
+            </span>
+            {{/if}}
 
-              <a class="open-power" data-id="{{power._id}}">
-                <span class="c-heading u-large">{{power.name}}</span>
-              </a>
-            </div>
-            <div class="o-grid__cell align-right">
-              <a class="delete-power c-link c-link--error" data-id="{{power._id}}">
-                <i class="fa-solid fa-trash"></i>
-              </a>
-            </div>
+            <a class="open-power" data-id="{{power._id}}">
+              <span class="c-heading u-large">{{power.name}}</span>
+            </a>
           </div>
-        </header>
-        <div class="c-card__body">
-          <p class="c-paragraph mx-4 my-0">
-            {{power.system.description}}
-          </p>
-          
-          {{#unless power.system.passive}}
-          <div class="o-grid mt-2">
-            <div class="o-grid__cell">
-              <i class="fa-solid fa-bolt"></i>
-              <span>{{power.system.cost}}</span>
-            </div>
-            <div class="o-grid__cell o-grid__cell--width-fixed" style="width: 5rem;">
-              <button class="use-power c-button c-button--success u-small u-text--loud" data-name="{{power.name}}" data-cost="{{power.system.cost}}" {{#if (lt ../data.system.energy.value power.system.cost)}}disabled{{/if}}>
-                Use
-              </button>
-            </div>
+
+          <div class="o-grid__cell align-right">
+            <a class="delete-power c-link c-link--error" data-id="{{power._id}}">
+              <i class="fa-solid fa-trash"></i>
+            </a>
           </div>
-          {{/unless}}
         </div>
+      </header>
+
+      <div class="c-card__body">
+        <blockquote class="u-blockquote px-4 py-1 mb-2">
+          <div class="u-blockquote__body py-1">
+            {{power.system.description}}
+          </div>
+        </blockquote>
+
+        <div class="o-grid o-grid--wrap">
+          {{#each power.system.tags as |tagId|}}
+            <div class="o-grid__cell">
+              <a class="tag-badge c-badge u-xsmall" data-id="{{tagId}}">{{itemName tagId}}</a>
+            </div>
+          {{/each}}
+        </div>
+
+        {{#unless power.system.passive}}
+        <div class="o-grid mt-3">
+          <div class="o-grid__cell">
+            <i class="fa-solid fa-bolt"></i>
+            <span>{{power.system.cost}}</span>
+          </div>
+          <div class="o-grid__cell o-grid__cell--width-fixed" style="width: 5rem;">
+            <button class="use-power c-button c-button--success u-small u-text--loud" data-name="{{power.name}}" data-cost="{{power.system.cost}}" {{#if (lt ../data.system.energy.value power.system.cost)}}disabled{{/if}}>
+              Use
+            </button>
+          </div>
+        </div>
+        {{/unless}}
       </div>
+    </div>
     {{/each}}
   </div>
   {{/if}}
 
   {{#if (eq data.system.tab 2)}}
-  <div role="tabpanel" class="c-tabs__tab">
-    <p class="c-paragraph">
-      Curabitur pellentesque suscipit ex, ac aliquet tortor faucibus et. Maecenas tincidunt augue a enim viverra, vitae rhoncus nunc vulputate. Cras euismod ut ante ac sollicitudin. Nam eleifend nunc nec neque consequat, eu condimentum purus placerat. Cras consectetur at ante a pellentesque. Maecenas consectetur vestibulum consequat. Aenean suscipit cursus efficitur. Quisque tincidunt massa tellus, vel lobortis diam bibendum ut. Curabitur sodales ornare est in efficitur. Nulla sagittis dignissim tellus, et ullamcorper mi aliquam cursus. Morbi tortor lacus, consequat mollis erat in, rhoncus vulputate erat. Suspendisse ut urna at risus aliquam posuere.
-    </p>
+  <div role="tabpanel" class="c-tabs__tab u-display-flex u-flex-column u-flex-1">
+    <div class="c-divider c-divider--solid pb-2">
+      <div class="c-divider__content">
+        Weapons
+      </div>
+    </div>
+
+    {{#each data.system.weapons as |weapon|}}
+    <div class="c-card u-text">
+      <header class="c-card__header">
+        <div class="o-grid">
+          <div class="o-grid__cell align-left">
+            <a class="open-item" data-id="{{weapon._id}}">
+              <span class="c-heading u-large">{{weapon.name}}</span>
+            </a>
+          </div>
+
+          <div class="o-grid__cell align-right">
+            <a class="delete-item c-link c-link--error" data-id="{{weapon._id}}">
+              <i class="fa-solid fa-trash"></i>
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <div class="c-card__body">
+        <div class="o-grid pb-3">
+          <div class="o-grid__cell align-center">
+            <span class="c-tooltip c-tooltip--bottom" aria-label="Quantity">
+              <i class="fa-solid fa-hashtag"></i><span> {{weapon.system.quantity}}</span>
+            </span>
+          </div>
+
+          <div class="o-grid__cell align-center">
+            <span class="c-tooltip c-tooltip--bottom" aria-label="Value">
+              <i class="fa-solid fa-coins"></i><span class="pl-1"> {{weapon.system.value}}</span>
+            </span>
+          </div>
+
+          <div class="o-grid__cell align-center">
+            <span class="c-tooltip c-tooltip--bottom" aria-label="Harm">
+              <i class="fa-solid fa-sword"></i><span class="pl-1"> {{weapon.system.harm}}</span>
+            </span>
+          </div>
+
+          <div class="o-grid__cell align-center">
+            <span class="c-tooltip c-tooltip--bottom" aria-label="Range">
+              {{#if weapon.system.range.near}}
+              <span class="c-badge c-badge--info">Near</span>
+              {{/if}}
+
+              {{#if weapon.system.range.mid}}
+              <span class="c-badge c-badge--info">Mid</span>
+              {{/if}}
+
+              {{#if weapon.system.range.far}}
+              <span class="c-badge c-badge--info">Far</span>
+              {{/if}}
+            </span>
+          </div>
+        </div>
+
+        <blockquote class="u-blockquote px-4 py-1 mb-2">
+          <div class="u-blockquote__body py-1">
+            {{weapon.system.description}}
+          </div>
+        </blockquote>
+
+        <div class="o-grid o-grid--wrap">
+          {{#each weapon.system.tags as |tagId|}}
+            <div class="o-grid__cell">
+              <a class="tag-badge c-badge u-xsmall" data-id="{{tagId}}">{{itemName tagId}}</a>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    {{/each}}
+
+    <div class="c-divider c-divider--solid mt-2 mb-2">
+      <div class="c-divider__content">
+        Gear
+      </div>
+    </div>
+
+    {{#each data.system.gear as |gear|}}
+    <div class="c-card u-text">
+      <header class="c-card__header">
+        <div class="o-grid">
+          <div class="o-grid__cell align-left">
+            <a class="open-item" data-id="{{gear._id}}">
+              <span class="c-heading u-large">{{gear.name}}</span>
+            </a>
+          </div>
+
+          <div class="o-grid__cell align-right">
+            <a class="delete-item c-link c-link--error" data-id="{{gear._id}}">
+              <i class="fa-solid fa-trash"></i>
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <div class="c-card__body">
+        <div class="o-grid pb-2">
+          <div class="o-grid__cell align-center">
+            <span class="c-tooltip c-tooltip--bottom" aria-label="Quantity">
+              <i class="fa-solid fa-hashtag"></i><span> {{gear.system.quantity}}</span>
+            </span>
+          </div>
+
+          <div class="o-grid__cell align-center">
+            <span class="c-tooltip c-tooltip--bottom" aria-label="Value">
+              <i class="fa-solid fa-coins"></i><span class="pl-1"> {{gear.system.value}}</span>
+            </span>
+          </div>
+          
+          <div class="o-grid__cell o-grid__cell--width-50"></div>
+        </div>
+
+        <blockquote class="u-blockquote px-4 py-1 mb-2">
+          <div class="u-blockquote__body py-1">
+            {{gear.system.description}}
+          </div>
+        </blockquote>
+
+        <div class="o-grid o-grid--wrap">
+          {{#each gear.system.tags as |tagId|}}
+            <div class="o-grid__cell">
+              <a class="tag-badge c-badge u-xsmall" data-id="{{tagId}}">{{itemName tagId}}</a>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    {{/each}}
   </div>
   {{/if}}
 

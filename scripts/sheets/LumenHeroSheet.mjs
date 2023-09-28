@@ -16,7 +16,7 @@ export default class LumenHeroSheet extends ActorSheet {
     const { actor } = this
     
     data.data.system.owner = actor.isOwner
-    data.data.system.equipment = data.data.items.filter(item => { return item.type === 'equipment' })
+    data.data.system.weapons = data.data.items.filter(item => { return item.type === 'weapon' })
     data.data.system.gear = data.data.items.filter(item => { return item.type === 'gear' })
     data.data.system.powers = data.data.items.filter(item => { return item.type === 'power' })
     
@@ -58,6 +58,10 @@ export default class LumenHeroSheet extends ActorSheet {
 
       case 1:
         this.powersTabListeners(html)
+        break;
+
+      case 2:
+        this.itemsTabListeners(html)
         break;
     
       default:
@@ -229,13 +233,77 @@ export default class LumenHeroSheet extends ActorSheet {
               `<i class="fa-solid fa-bolt"></i> `,
               `<span class="u-text--loud">${actor.name}</span> `,
               `burns ${powerCost} Energy to use `,
-              `<span class="u-text--loud">${powerName}</span>! `,
+              `<span class="u-text--loud">${powerName}</span> `,
               `<i class="fa-solid fa-bolt"></i>`,
              `</p>` 
             ].join('')
           })
 
           actor.update({ 'system.energy.value': (energy - powerCost) })
+        }
+      })
+    
+    html
+      .find('.tag-badge')
+      .click(evt => {
+        evt.preventDefault()
+
+        const el = evt.currentTarget
+        const tagId = el.dataset.id
+        const tagItem = game.items.find(gi => gi.id === tagId)
+        
+        if (tagItem) {
+          tagItem.sheet.render(true)
+        }
+      })
+  }
+
+  itemsTabListeners(html) {
+    const { actor } = this
+    
+    html
+      .find('.open-item')
+      .click(async (evt) => {
+        evt.preventDefault()
+        
+        const el = evt.currentTarget
+        const itemId = el.dataset.id
+        const itemItem = actor.items.find(item => item.id === itemId)
+        if (itemItem) {
+          itemItem.sheet.render(true)
+        }
+      })
+
+    html
+      .find('.delete-item')
+      .click(async (evt) => {
+        evt.preventDefault()
+        
+        const el = evt.currentTarget
+        const itemId = el.dataset.id
+        const itemItem = actor.items.find(item => item.id === itemId)
+        if (itemItem) {
+          Dialog.confirm({
+            title: 'Delete Item',
+            content: `<p class="c-paragraph">Are you sure you wish to delete <span class="u-text--loud">${itemItem.name}</span>? This cannot be undone.</p>`,
+            yes: () => {
+              itemItem.delete()
+            }
+          })
+        }
+      })
+    
+    html
+      .find('.tag-badge')
+      .click(evt => {
+        evt.preventDefault()
+
+        const el = evt.currentTarget
+        const tagId = el.dataset.id
+        const tagItem = game.items.find(gi => gi.id === tagId)
+        
+        if (tagItem) {
+          tagItem.sheet.render(true)
         }
       })
   }

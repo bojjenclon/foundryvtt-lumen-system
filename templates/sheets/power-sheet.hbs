@@ -52,4 +52,29 @@
   <div class="m-2">
     <textarea class="c-field" name="system.description" rows="4">{{data.system.description}}</textarea>
   </div>
+
+  <div class="c-divider c-divider--solid">
+    <div class="c-divider__content">
+      Tags
+    </div>
+  </div>
+
+  <div class="o-grid o-grid--wrap mb-2">
+    {{#each data.system.tags as |tag|}}
+      <div class="o-grid__cell">
+        <div class="c-badge u-large">{{tag.name}}</div>
+      </div>
+    {{/each}}
+  </div>
+  
+  <div class="o-grid">
+    <div class="o-grid__cell o-grid__cell--width-75">
+    </div>
+
+    <div class="o-grid__cell">
+      <button class="add-tag c-button">
+        Edit Tags
+      </button>
+    </div>
+  </div>
 </form>

@@ -33,6 +33,10 @@ export class LumenSystem {
 
     registerGameSettings(this.SYSTEM)
 
+    Handlebars.registerHelper('contains', (arr, val) => {
+      return arr.includes(val)
+    })
+
     Handlebars.registerHelper('face', value => {
       switch (value) {
         case 1:
@@ -58,6 +62,14 @@ export class LumenSystem {
 
     Handlebars.registerHelper('dieColor', (a, b) => {
       return a === b ? 'darkgreen' : 'black'
+    })
+
+    Handlebars.registerHelper('itemName', id => {
+      return game.items.find(gi => gi.id === id).name
+    })
+
+    Handlebars.registerHelper('allItemNames', ids => {
+      return game.items.filter(gi => ids.includes(gi.id)).map(gi => gi.name)
     })
   }
 

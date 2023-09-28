@@ -1,0 +1,11 @@
+<div class="o-grid o-grid--wrap mt-2 mb-4">
+{{#each gameTags as |tag|}}
+  <div class="o-grid__cell">
+    {{#if (contains ../itemTags tag._id)}}
+    <div class="tag-badge c-badge u-large c-badge--success" data-id="{{tag._id}}" data-has="true">{{tag.name}}</div>
+    {{^}}
+    <div class="tag-badge c-badge u-large" data-id="{{tag._id}}" data-has="false">{{tag.name}}</div>
+    {{/if}}
+  </span>
+{{/each}}
+</div>

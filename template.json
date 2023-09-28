@@ -51,14 +51,17 @@
           "mid": false,
           "far": false
         }
+      },
+      "taggable": {
+        "tags": []
       }
     },
     "weapon": {
-      "templates": ["basic", "hasRange"],
+      "templates": ["basic", "hasRange", "taggable"],
       "harm": 1
     },
     "gear": {
-      "templates": ["basic"]
+      "templates": ["basic", "taggable"]
     },
     "power": {
       "templates": [],
