@@ -20,17 +20,28 @@
   
   <div class="o-grid">
     <div class="o-grid__cell">
-      <div class="u-heading u-large">Passive</div>
+      <label class="u-heading u-large" for="system.passive">Passive</label>
     </div>
     <div class="o-grid__cell u-display-flex justify-end">
       <label class="c-toggle c-toggle--success">
-        <input name="system.passive" type="checkbox" {{#if data.system.passive}}checked{{/if}} />
+        <input id="system.passive" name="system.passive" type="checkbox" {{#if data.system.passive}}checked{{/if}} />
         <div class="c-toggle__track">
           <div class="c-toggle__handle"></div>
         </div>
       </label>
     </div>
   </div>
+
+  {{#unless data.system.passive}}
+  <div class="o-grid pt-2">
+    <div class="o-grid__cell">
+      <label class="u-heading u-large" for="system.cost">Cost</label>
+    </div>
+    <div class="o-grid__cell u-display-flex justify-end">
+      <input id="system.cost" name="system.cost" class="c-field u-large align-right" type="number" value="{{data.system.cost}}" min="1" max="99" step="1" />
+    </div>
+  </div>
+  {{/unless}}
   
   <div class="c-divider c-divider--solid">
     <div class="c-divider__content">

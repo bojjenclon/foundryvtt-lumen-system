@@ -62,7 +62,8 @@
     },
     "power": {
       "templates": [],
-      "passive": false
+      "passive": false,
+      "cost": 1
     },
     "tag": {
       "templates": []

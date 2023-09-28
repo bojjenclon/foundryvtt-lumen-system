@@ -40,7 +40,6 @@ export default class LumenHeroSheet extends ActorSheet {
     console.log('lumen | activating listeners')
     
     const { actor } = this
-    
     html
       .find('.c-tab-heading')
       .click(evt => {
@@ -51,6 +50,23 @@ export default class LumenHeroSheet extends ActorSheet {
 
         actor.update({ 'system.tab': idx })
       })
+    
+    switch (actor.system.tab) {
+      case 0:
+        this.coreTabListeners(html)
+        break;
+
+      case 1:
+        this.powersTabListeners(html)
+        break;
+    
+      default:
+        break;
+    }
+  }
+  
+  coreTabListeners(html) {
+    const { actor } = this
     
     const performRoll = async (dieCount, approach) => {
       const result = await new Roll(`${dieCount}d6kh`, {})
@@ -158,6 +174,56 @@ export default class LumenHeroSheet extends ActorSheet {
       .click(() => {
         const d = createExternalEditor(actor.system.notes, 'system.notes')
         d.render(true)
+      })
+  }
+  
+  powersTabListeners(html) {
+    const { actor } = this
+    
+    html
+      .find('.open-power')
+      .click(async (evt) => {
+        evt.preventDefault()
+        
+        const el = evt.currentTarget
+        const powerId = el.dataset.id
+        const powerItem = actor.items.find(item => item.id === powerId)
+        if (powerItem) {
+          powerItem.sheet.render(true)
+        }
+      })
+
+    html
+      .find('.delete-power')
+      .click(async (evt) => {
+        evt.preventDefault()
+        
+        const el = evt.currentTarget
+        const powerId = el.dataset.id
+        const powerItem = actor.items.find(item => item.id === powerId)
+        if (powerItem) {
+          Dialog.confirm({
+            title: 'Delete Power',
+            content: `<p class="c-paragraph">Are you sure you wish to delete <span class="u-text--loud">${powerItem.name}</span>? This cannot be undone.</p>`,
+            yes: () => {
+              powerItem.delete()
+            }
+          })
+        }
+      })
+
+    html
+      .find('.use-power')
+      .click(async (evt) => {
+        evt.preventDefault()
+        
+        const el = evt.currentTarget
+        const powerCost = el.dataset.cost
+        const energy = actor.system.energy.value
+        
+        if (energy >= powerCost) {
+          actor.update({ 'system.energy.value': (energy - powerCost) })
+        }
       })
   }
 }
