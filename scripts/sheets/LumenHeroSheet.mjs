@@ -322,12 +322,19 @@ export default class LumenHeroSheet extends ActorSheet {
           .filter(gi => gi.type === 'tag')
           .sort((a, b) => a.name.localeCompare(b.name))
         
-        var tagListDialog = new Dialog({
-          title: 'Tag List',
-          content: await renderTemplate('systems/lumen/templates/partials/tag-list.hbs', { tags }),
-          buttons: [],
-          resizable: true
-        })
+        var tagListDialog = new Dialog(
+          {
+            title: 'Tag List',
+            content: await renderTemplate('systems/lumen/templates/partials/tag-list.hbs', { tags }),
+            buttons: []
+          },
+          {
+            width: 400,
+            height: 300,
+            popOut: true,
+            resizable: true,
+          }
+        )
         tagListDialog.render(true)
       })
   }
