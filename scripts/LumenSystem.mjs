@@ -1,11 +1,13 @@
 import { lumen } from './config.mjs'
 import { registerGameSettings } from './settings.mjs'
+import Essence from './helpers/essence.mjs'
 import LumenHeroSheet from './sheets/LumenHeroSheet.mjs'
 import LumenItemSheet from './sheets/LumenItemSheet.mjs'
 
 export class LumenSystem {
   static SYSTEM = 'lumen'
-  static SOCKET = 'system.lumen'
+
+  static socket
 
   static init() {
     console.log(`LUMEN - initializing system`)
@@ -32,6 +34,13 @@ export class LumenSystem {
     )
 
     registerGameSettings(this.SYSTEM)
+    
+    const templatePaths = [
+      'systems/lumen/templates/partials/roll-result.hbs',
+      'systems/lumen/templates/partials/tag-editor.hbs',
+      'systems/lumen/templates/partials/tag-list.hbs'
+    ]
+    loadTemplates(templatePaths)
 
     Handlebars.registerHelper('contains', (arr, val) => {
       return arr.includes(val)
@@ -73,12 +82,179 @@ export class LumenSystem {
     })
   }
 
-  static ready() {
+  static async ready() {
     console.log('LUMEN | ready')
     
-    document.querySelector('html').classList.add('t-dark')
+    document
+      .querySelector('html')
+      .classList
+      .add('t-dark')
+    
+    const chatSidebar = document.querySelector('.chat-sidebar')
+    const actionBar = await renderTemplate('systems/lumen/templates/partials/action-bar.hbs')
+    chatSidebar.insertAdjacentHTML('afterbegin', actionBar)
+
+    $(chatSidebar)
+      .find('.hide-dialog')
+      .click(evt => {
+        evt.preventDefault()
+        LumenSystem.hideEssenceDialog()
+      })
+    
+    $(chatSidebar)
+      .find('.show-dialog')
+      .click(evt => {
+        evt.preventDefault()
+        LumenSystem.showEssenceDialog()
+      })
+
+    $(chatSidebar)
+      .find('.add-essence')
+      .click(async (evt) => {
+        evt.preventDefault()
+        
+        const essenceTables = await game.tables.filter(t => t.folder.name === 'Essence')
+        const options = essenceTables.map(et => `<option value="${et.id}">${et.name}</option>`)
+        
+        let amount = 0
+        let tableId = ''
+        
+        await Dialog.prompt({
+          title: 'Generate Essence',
+          img: 'icons/containers/bags/sack-leather-brown-green.webp',
+          content: [
+            `<p style="text-align: center;"><select name="table">${options.join('')}</select></p>`,
+            `<p><input name="amount" type="number" min="1" step="1" value="1"></p>`,
+          ].join(''),
+          render: (html) => {
+            setTimeout(
+              () => {
+                const input = html.find('input[name="amount"]')
+                input.focus()
+                input.select()
+              },
+              0
+            )
+          },
+          callback: (html) => {
+            amount = html.find('input[name="amount"]').val()
+            tableId = html.find('select[name="table"]').val()
+          }
+        })
+        
+        if (amount < 1 || tableId.length === 0) {
+          return
+        }
+
+        const table = game.tables.find(t => t.id === tableId)
+        const { results } = await table.drawMany(amount, { displayChat: false })
+        
+        for (let res of results) {
+          const { text } = res
+          switch (text) {
+            case 'Health':
+              LumenSystem.addEssence('health', 1)
+              break
+
+            case 'Energy':
+              LumenSystem.addEssence('energy', 1)
+              break
+          }
+        }
+      })
+
+    $(chatSidebar)
+      .find('.clear-essence')
+      .click(evt => {
+        evt.preventDefault()
+        LumenSystem.clearEssence()
+      })
+  }
+  
+  static socketlib() {
+    const socket = socketlib.registerSystem('lumen')
+    
+    socket.register('addEssence', (type, amount) => {
+      let typeName = ''
+      switch (type) {
+        case 'health':
+          typeName = 'Health'
+          break
+
+        case 'energy':
+          typeName = 'Energy'
+          break
+      }
+
+      const clientStorage = game.settings.storage.get('client')
+      const essence = JSON.parse(clientStorage.getItem('essence') || '[]')
+      for (let i = 0; i < amount; i++) {
+        essence.push({
+          name: typeName,
+          is: {
+            health: type === 'health',
+            energy: type === 'energy'
+          } 
+        })
+      }
+      clientStorage.setItem('essence', JSON.stringify(essence))
+
+      Essence.showDialog()
+    })
+
+    socket.register('removeEssence', idx => {
+      const clientStorage = game.settings.storage.get('client')
+      const essence = JSON.parse(clientStorage.getItem('essence') || '[]')
+      essence.splice(idx, 1)
+      clientStorage.setItem('essence', JSON.stringify(essence))
+
+      Essence.refreshDialog()
+    })
+    
+    socket.register('clearEssence', () => {
+      const clientStorage = game.settings.storage.get('client')
+      clientStorage.setItem('essence', '[]')
+
+      Essence.hideDialog()
+    })
+
+    socket.register('showEssenceDialog', () => {
+      Essence.showDialog()
+    })
+
+    socket.register('hideEssenceDialog', () => {
+      Essence.hideDialog()
+    })
+    
+    LumenSystem.socket = socket
+  }
+  
+  static addEssence(type, amount) {
+    const { socket } = LumenSystem 
+    socket.executeForEveryone('addEssence', type, amount)
+  }
+  
+  static removeEssence(idx) {
+    const { socket } = LumenSystem 
+    socket.executeForEveryone('removeEssence', idx)
+  }
+  
+  static clearEssence() {
+    const { socket } = LumenSystem 
+    socket.executeForEveryone('clearEssence')
+  }
+  
+  static showEssenceDialog() {
+    const { socket } = LumenSystem 
+    socket.executeForEveryone('showEssenceDialog')
+  }
+  
+  static hideEssenceDialog() {
+    const { socket } = LumenSystem 
+    socket.executeForEveryone('hideEssenceDialog')
   }
 }
 
 Hooks.once('init', LumenSystem.init)
 Hooks.once('ready', LumenSystem.ready)
+Hooks.once('socketlib.ready', LumenSystem.socketlib)

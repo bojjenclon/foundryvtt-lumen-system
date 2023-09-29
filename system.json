@@ -31,6 +31,19 @@
       "path": "languages/en.json"
     }
   ],
+  "relationships": {
+    "systems": [],
+    "requires": [
+      {
+        "id": "socketlib",
+        "type": "module"
+      },
+      {
+        "id": "lib-wrapper",
+        "type": "module"
+      }
+    ]
+  },
   "socket": true,
   "license": "LICENSE",
   "readme": "README.md",

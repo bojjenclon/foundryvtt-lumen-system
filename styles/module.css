@@ -61,6 +61,10 @@ input[type="number"].u-xlarge {
   flex-direction: column;
 }
 
+.u-flex-wrap {
+  flex-wrap: wrap;
+}
+
 .justify-center {
   justify-content: center;
 }
@@ -163,6 +167,10 @@ input.p-2 {
   margin-bottom: 0;
 }
 
+.m-1 {
+  margin: 0.25rem;
+}
+
 .m-2 {
   padding: 0.5rem;
 }
@@ -197,6 +205,12 @@ input.align-right {
   text-align: right;
 }
 
+.action-bar {
+  flex: 0;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .illuminated-by-lumen {
   background-image: url('../assets/images/illuminated-lumen-logo-black.png');
   background-position: right;
@@ -210,4 +224,21 @@ input.align-right {
 .notes {
   max-height: 24rem;
   overflow: auto;
+}
+
+.essence-dialog {
+  position: absolute;
+  z-index: calc(var(--z-index-canvas) + 1);
+
+  bottom: 5px;
+  right: calc(var(--sidebar-width) + 15px);
+  
+  width: 225px;
+  height: 175px;
+
+  background: url(../../../ui/parchment.jpg) repeat;
+}
+
+.essence-dialog .content {
+  height: 100%;
 }

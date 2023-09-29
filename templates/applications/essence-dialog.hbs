@@ -1,0 +1,27 @@
+<div class="essence-dialog c-card u-higher u-display-flex u-flex-column">
+  <header class="c-card__header u-flex-0 pb-2">
+    <div class="c-heading u-xlarge">
+      Essence
+    </div>
+  </header>
+
+  <div class="c-card__body o-panel-container u-flex-1">
+    <div class="o-panel">
+      <div class="u-display-flex u-flex-wrap">
+        {{#each essence as |ess|}}
+          {{#if ess.is.health}}
+          <a class="c-badge c-badge--error u-large m-1" title="{{ess.name}}" data-idx="{{@index}}" data-type="health">
+            <i class="fa-solid fa-heart"></i>
+          </a>
+          {{/if}}
+
+          {{#if ess.is.energy}}
+          <a class="c-badge c-badge--warning u-large m-1" title="{{ess.name}}" data-idx="{{@index}}" data-type="energy">
+            <i class="fa-solid fa-bolt"></i>
+          </a>
+          {{/if}}
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>
