@@ -84,6 +84,16 @@ export class LumenSystem {
     Handlebars.registerHelper('claimedByAny', ess => {
       return Object.values(ess.claimed).some(v => !!v)
     })
+
+    Handlebars.registerHelper('claimedByUser', (ess, userId) => {
+      const { claimed } = ess
+      for (let id in claimed) {
+        if (claimed[id] && id === userId) {
+          return true
+        }
+      }
+      return false
+    })
   }
 
   static async ready() {
@@ -101,13 +111,6 @@ export class LumenSystem {
     const chatSidebar = document.querySelector('.chat-sidebar')
     const actionBar = await renderTemplate('systems/lumen/templates/partials/action-bar.hbs')
     chatSidebar.insertAdjacentHTML('afterbegin', actionBar)
-
-    $(chatSidebar)
-      .find('.hide-dialog')
-      .click(evt => {
-        evt.preventDefault()
-        LumenSystem.hideEssenceDialog()
-      })
     
     $(chatSidebar)
       .find('.show-dialog')

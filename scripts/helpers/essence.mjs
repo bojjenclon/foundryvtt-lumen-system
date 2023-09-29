@@ -38,12 +38,6 @@ const createDialog = async () => {
 
         if (curVal + 1 <= maxVal) {
           LumenSystem.toggleClaimOnEssence(idx, user.id)
-
-          // await character.update({
-          //   [propPath]: (getProperty(character, propPath) + 1)
-          // })
-
-          // LumenSystem.removeEssence(idx)
         }
       }
     })

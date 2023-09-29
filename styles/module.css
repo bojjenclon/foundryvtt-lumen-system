@@ -240,7 +240,15 @@ input.align-right {
 }
 
 .essence-dialog .content {
-  height: 100%;
+  font-size: 0.5rem;
+}
+
+.essence-dialog .c-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
 }
 
 .essence-dialog .c-badge.claimed {
