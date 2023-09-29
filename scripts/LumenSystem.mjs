@@ -80,6 +80,10 @@ export class LumenSystem {
     Handlebars.registerHelper('allItemNames', ids => {
       return game.items.filter(gi => ids.includes(gi.id)).map(gi => gi.name)
     })
+
+    Handlebars.registerHelper('claimedByAny', ess => {
+      return Object.values(ess.claimed).some(v => !!v)
+    })
   }
 
   static async ready() {
@@ -90,6 +94,10 @@ export class LumenSystem {
       .classList
       .add('t-dark')
     
+    if (!game.user.isGM) {
+      return
+    }
+
     const chatSidebar = document.querySelector('.chat-sidebar')
     const actionBar = await renderTemplate('systems/lumen/templates/partials/action-bar.hbs')
     chatSidebar.insertAdjacentHTML('afterbegin', actionBar)
@@ -169,6 +177,68 @@ export class LumenSystem {
         evt.preventDefault()
         LumenSystem.clearEssence()
       })
+
+    $(chatSidebar)
+      .find('.apply-essence')
+      .click(async (evt) => {
+        evt.preventDefault()
+
+        const clientStorage = game.settings.storage.get('client')
+        const essence = JSON.parse(clientStorage.getItem('essence') || '[]')
+        
+        for (let idx = essence.length - 1; idx >= 0; idx--) {
+          const ess = essence[idx]
+          const { claimed } = ess
+          const claimedIds = Object.keys(claimed)
+
+          const amountClaimed = Object
+            .values(claimed)
+            .reduce((accum, val) => accum + (val ? 1 : 0), 0)
+          if (amountClaimed === 0) {
+            continue
+          }
+          
+          const addEssence = async (id) => {
+            const user = game.users.get(id)
+            if (!user) {
+              return
+            }
+
+            const { character } = user
+            if (!character) {
+              return
+            }
+            
+            let essProp = ''
+            if (ess.is.health) {
+              essProp = 'health'
+            } else if (ess.is.energy) {
+              essProp = 'energy'
+            }
+            const propPath = `system.${essProp}.value`
+            await character.update({ [propPath]: getProperty(character, propPath) + 1 })
+
+            LumenSystem.removeEssence(idx)
+          }
+          
+          let randoIds = []
+          for (let id of claimedIds) {
+            if (amountClaimed === 1) {
+              await addEssence(id)
+            } else {
+              randoIds.push(id)
+            }
+          }
+          
+          const percent = 1.0 / randoIds.length
+          for (let id of randoIds) {
+            if (Math.random() < percent) {
+              addEssence(id)
+              break
+            }
+          }
+        }
+      })
   }
   
   static socketlib() {
@@ -186,20 +256,36 @@ export class LumenSystem {
           break
       }
 
+      const userIds = game.users.map(u => u.id)
+      const claimedTemplate = {}
+      userIds.forEach(id => claimedTemplate[id] = false)
+
       const clientStorage = game.settings.storage.get('client')
       const essence = JSON.parse(clientStorage.getItem('essence') || '[]')
+
       for (let i = 0; i < amount; i++) {
         essence.push({
           name: typeName,
           is: {
             health: type === 'health',
             energy: type === 'energy'
-          } 
+          },
+          claimed: Object.assign({}, claimedTemplate)
         })
       }
       clientStorage.setItem('essence', JSON.stringify(essence))
 
       Essence.showDialog()
+    })
+    
+    socket.register('toggleClaimOnEssence', (idx, userId) => {
+      const clientStorage = game.settings.storage.get('client')
+      const essence = JSON.parse(clientStorage.getItem('essence') || '[]')
+      const propPath = `${idx}.claimed.${userId}`;
+      setProperty(essence, propPath, !getProperty(essence, propPath))
+      clientStorage.setItem('essence', JSON.stringify(essence))
+
+      Essence.refreshDialog()
     })
 
     socket.register('removeEssence', idx => {
@@ -232,6 +318,11 @@ export class LumenSystem {
   static addEssence(type, amount) {
     const { socket } = LumenSystem 
     socket.executeForEveryone('addEssence', type, amount)
+  }
+
+  static toggleClaimOnEssence(idx, userId) {
+    const { socket } = LumenSystem 
+    socket.executeForEveryone('toggleClaimOnEssence', idx, userId)
   }
   
   static removeEssence(idx) {

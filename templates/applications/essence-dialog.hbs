@@ -10,13 +10,13 @@
       <div class="u-display-flex u-flex-wrap">
         {{#each essence as |ess|}}
           {{#if ess.is.health}}
-          <a class="c-badge c-badge--error u-large m-1" title="{{ess.name}}" data-idx="{{@index}}" data-type="health">
+          <a class="c-badge c-badge--error u-large m-1 {{#if (claimedByAny ess)}}claimed{{/if}}" title="{{ess.name}}" data-idx="{{@index}}" data-type="health">
             <i class="fa-solid fa-heart"></i>
           </a>
           {{/if}}
 
           {{#if ess.is.energy}}
-          <a class="c-badge c-badge--warning u-large m-1" title="{{ess.name}}" data-idx="{{@index}}" data-type="energy">
+          <a class="c-badge c-badge--warning u-large m-1 {{#if (claimedByAny ess)}}claimed{{/if}}" title="{{ess.name}}" data-idx="{{@index}}" data-type="energy">
             <i class="fa-solid fa-bolt"></i>
           </a>
           {{/if}}

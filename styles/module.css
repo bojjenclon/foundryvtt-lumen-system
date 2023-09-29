@@ -242,3 +242,8 @@ input.align-right {
 .essence-dialog .content {
   height: 100%;
 }
+
+.essence-dialog .c-badge.claimed {
+  background: white;
+  color: black;
+}

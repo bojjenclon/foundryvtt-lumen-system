@@ -8,10 +8,12 @@ const createDialog = async () => {
     return
   }
 
+  const { user } = game
   const template = await renderTemplate(
     'systems/lumen/templates/applications/essence-dialog.hbs',
     {
-      essence
+      essence,
+      userId: user.id
     }
   )
 
@@ -35,11 +37,13 @@ const createDialog = async () => {
         const maxVal = getProperty(character, `system.${type}.max`)
 
         if (curVal + 1 <= maxVal) {
-          await character.update({
-            [propPath]: (getProperty(character, propPath) + 1)
-          })
+          LumenSystem.toggleClaimOnEssence(idx, user.id)
 
-          LumenSystem.removeEssence(idx)
+          // await character.update({
+          //   [propPath]: (getProperty(character, propPath) + 1)
+          // })
+
+          // LumenSystem.removeEssence(idx)
         }
       }
     })
