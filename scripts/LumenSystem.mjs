@@ -135,6 +135,9 @@ export class LumenSystem {
       .querySelector('html')
       .classList
       .add('t-dark')
+    
+    // Make sure no essence is stored from previous sessions
+    LumenSystem.clearEssence()
   }
   
   static socketlib() {
