@@ -1,8 +1,8 @@
 {
   "id": "lumen",
   "title": "LUMEN",
-  "description": "",
-  "version": "0.0.1",
+  "description": "Basic implementation of the LUMEN game system by Spencer Campbell.",
+  "version": "#{VERSION}#",
   "compatibility": {
     "minimum": 10,
     "verified": 11,
@@ -44,6 +44,9 @@
       }
     ]
   },
+  "url": "#{URL}#",
+  "manifest": "#{MANIFEST}#",
+  "download": "#{DOWNLOAD}#",
   "socket": true,
   "license": "LICENSE",
   "readme": "README.md",
