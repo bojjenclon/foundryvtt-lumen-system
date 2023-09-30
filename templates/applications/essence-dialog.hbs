@@ -12,12 +12,9 @@
           {{#if ess.is.health}}
           <a class="c-badge c-badge--error u-large m-1 {{#if (claimedByAny ess)}}claimed{{/if}}" title="{{ess.name}}" data-idx="{{@index}}" data-type="health">
             {{#if (claimedByUser ess ../userId)}}
-            <span class="fa-stack">
-              <i class="fa-regular fa-circle fa-stack-2x"></i>
-              <i class="fa-solid fa-heart fa-stack-1x"></i>
-            </span>
+            <i class="fa-solid fa-heart fa-fw fa-2x fa-beat" style="--fa-animation-duration: 2.25s; --fa-beat-scale: 1.2;"></i>
             {{^}}
-            <i class="fa-solid fa-heart fa-2x"></i>
+            <i class="fa-solid fa-heart fa-fw fa-2x"></i>
             {{/if}}
           </a>
           {{/if}}
@@ -25,12 +22,9 @@
           {{#if ess.is.energy}}
           <a class="c-badge c-badge--warning u-large m-1 {{#if (claimedByAny ess)}}claimed{{/if}}" title="{{ess.name}}" data-idx="{{@index}}" data-type="energy">
             {{#if (claimedByUser ess ../userId)}}
-            <span class="fa-stack">
-              <i class="fa-regular fa-circle fa-stack-2x"></i>
-              <i class="fa-solid fa-bolt fa-stack-1x"></i>
-            </span>
+            <i class="fa-solid fa-bolt fa-fw fa-2x fa-beat" style="--fa-animation-duration: 2.25s; --fa-beat-scale: 1.2;"></i>
             {{^}}
-            <i class="fa-solid fa-bolt fa-2x"></i>
+            <i class="fa-solid fa-bolt fa-fw fa-2x"></i>
             {{/if}}
           </a>
           {{/if}}
