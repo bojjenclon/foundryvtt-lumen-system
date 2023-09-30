@@ -31,10 +31,14 @@
       "tab": 0
     },
     "character": {
-      "templates": ["resources"]
+      "templates": ["resources"],
+      "notes": ""
     },
     "enemy": {
-      "templates": ["resources"]
+      "templates": ["resources"],
+      "attacks": [],
+      "moves": [],
+      "notes": ""
     }
   },
   "Item": {

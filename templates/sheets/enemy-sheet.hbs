@@ -1,0 +1,259 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <div class="u-display-flex pb-2">
+    <div class="u-flex-0">
+      <div class="c-avatar u-super">
+        <img class="c-avatar__img" data-edit="img" alt="{{actor.name}}" src="{{actor.img}}" />
+      </div>
+    </div>
+
+    <div class="u-flex-1 u-display-flex u-flex-column pl-4 mb-2">
+      <div class="u-flex-1 illuminated-by-lumen"></div>
+      <input class="c-field u-xlarge" type="text" name="name" value="{{actor.name}}" />
+    </div> 
+  </div>
+  
+  <div class="c-divider c-divider--solid mb-2">
+    <div class="c-divider__content">
+      Stats
+    </div>
+  </div>
+
+  <div class="c-table pb-4">
+    <div class="c-table__row">
+      <span class="c-table__cell">
+        <span class="c-heading u-xlarge padding-small">Health</span>
+      </span>
+      <span class="c-table__cell u-flex justify-end items-center">
+        <div class="c-input-group u-flex-1/2">
+          <div class="o-field">
+            <input
+              name="system.health.value"
+              value="{{data.system.health.value}}"
+              class="c-input u-large align-right"
+              type="number"
+              min="0"
+              max="{{data.system.health.max}}"
+              step="1"
+            />
+          </div>
+          <div class="o-field o-field--fixed px-2 u-display-flex u-flex-column justify-center">
+            <span>/</span>
+          </div>
+          <div class="o-field">
+            <input
+              name="system.health.max"
+              value="{{data.system.health.max}}"
+              class="c-input u-large align-right"
+              type="number"
+              min="0"
+              max="99"
+              step="1"
+            />
+          </div>
+        </div>
+      </span>
+    </div>
+    
+    {{#if data.system.supportShields}}
+    <div class="c-table__row">
+      <span class="c-table__cell">
+        <span class="c-heading u-xlarge padding-small">Shields</span>
+      </span>
+      <span class="c-table__cell u-flex justify-end items-center">
+        <div class="c-input-group u-flex-1/2">
+          <div class="o-field">
+            <input
+              name="system.shield.value"
+              value="{{data.system.shield.value}}"
+              class="c-input u-large align-right"
+              type="number"
+              min="0"
+              max="{{data.system.shield.max}}"
+              step="1"
+            />
+          </div>
+          <div class="o-field o-field--fixed px-2 u-display-flex u-flex-column justify-center">
+            <span>/</span>
+          </div>
+          <div class="o-field">
+            <input
+              name="system.shield.max"
+              value="{{data.system.shield.max}}"
+              class="c-input u-large align-right"
+              type="number"
+              min="0"
+              max="99"
+              step="1"
+            />
+          </div>
+        </div>
+      </span>
+    </div>
+    {{/if}}
+
+    <div class="c-table__row">
+      <span class="c-table__cell">
+        <span class="c-heading u-xlarge padding-small">Energy</span>
+      </span>
+      <span class="c-table__cell u-flex justify-end items-center">
+        <div class="c-input-group u-flex-1/2">
+          <div class="o-field">
+            <input
+              name="system.energy.value"
+              value="{{data.system.energy.value}}"
+              class="c-input u-large align-right"
+              type="number"
+              min="0"
+              max="{{data.system.energy.max}}"
+              step="1"
+            />
+          </div>
+          <div class="o-field o-field--fixed px-2 u-display-flex u-flex-column justify-center">
+            <span>/</span>
+          </div>
+          <div class="o-field">
+            <input
+              name="system.energy.max"
+              value="{{data.system.energy.max}}"
+              class="c-input u-large align-right"
+              type="number"
+              min="0"
+              max="99"
+              step="1"
+            />
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+
+  <div class="c-divider c-divider--solid mb-2">
+    <div class="c-divider__content">
+      Attacks
+    </div>
+  </div>
+  
+  {{#each data.system.attacks as |attack|}}
+  <div class="c-card u-text">
+    <div class="c-card__body">
+      <div class="o-grid {{#unless (empty attack.tags)}}pb-3{{/unless}}">
+        <div class="o-grid__cell align-left">
+          <span class="c-tooltip c-tooltip--bottom" aria-label="Harm">
+            <i class="fa-solid fa-sword"></i><span class="pl-1"> {{attack.harm}}</span>
+          </span>
+        </div>
+
+        <div class="o-grid__cell align-center">
+          <span class="c-tooltip c-tooltip--bottom" aria-label="Range">
+            {{#if attack.range.near}}
+            <span class="c-badge c-badge--info">Near</span>
+            {{/if}}
+
+            {{#if attack.range.mid}}
+            <span class="c-badge c-badge--info">Mid</span>
+            {{/if}}
+
+            {{#if attack.range.far}}
+            <span class="c-badge c-badge--info">Far</span>
+            {{/if}}
+          </span>
+        </div>
+
+        <div class="o-grid__cell align-right">
+          <a class="edit-attack c-tooltip c-tooltip--left pr-2" aria-label="Edit" data-idx="{{@index}}">
+            <i class="fa-solid fa-pencil"></i>
+          </a>
+
+          <a class="delete-attack c-tooltip c-tooltip--left" aria-label="Delete" data-idx="{{@index}}">
+            <i class="fa-solid fa-trash"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="o-grid o-grid--wrap">
+        {{#each attack.tags as |tagId|}}
+          <div class="o-grid__cell">
+            <a class="tag-badge c-badge u-xsmall" data-id="{{tagId}}">{{itemName tagId}}</a>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+  {{/each}}
+  
+  <div class="attack-actions mt-2">
+    <div class="o-grid">
+      <div class="o-grid__cell o-grid__cell--width-20 o-grid__cell--offset-80">
+        <button type="button" class="add-attack c-button u-medium">
+          <i class="fa-solid fa-axe fa-sm"></i>
+          <span>Add Attack</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-divider c-divider--solid mb-2">
+    <div class="c-divider__content">
+      Moves
+    </div>
+  </div>
+
+  {{#each data.system.moves as |move|}}
+  <div class="c-card u-text">
+    <div class="c-card__body">
+      <div class="o-grid">
+        <div class="o-grid__cell align-right">
+          <a class="edit-move c-tooltip c-tooltip--left pr-2" data-idx="{{@index}}" aria-label="Edit">
+            <i class="fa-solid fa-pencil"></i>
+          </a>
+
+          <a class="delete-move c-tooltip c-tooltip--left" data-idx="{{@index}}" aria-label="Delete">
+            <i class="fa-solid fa-trash"></i>
+          </a>
+        </div>
+      </div>
+
+      <blockquote class="u-blockquote px-4 py-1">
+        <div class="u-blockquote__body py-1">
+          {{move}}
+        </div>
+      </blockquote>
+    </div>
+  </div>
+  {{/each}}
+
+  <div class="move-actions mt-2">
+    <div class="o-grid">
+      <div class="o-grid__cell o-grid__cell--width-20 o-grid__cell--offset-80">
+        <button type="button" class="add-move c-button u-medium">
+          <i class="fa-solid fa-person-walking"></i>
+          <span>Add Move</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-divider c-divider--solid mb-2">
+    <div class="c-divider__content">
+      Notes
+    </div>
+  </div>
+
+  {{#unless (empty notesHTML)}}
+  <div class="system-notes mx-4 pb-4">
+    {{{notesHTML}}}
+  </div>
+  {{/unless}}
+
+  <div class="note-actions">
+    <div class="o-grid">
+      <div class="o-grid__cell o-grid__cell--width-20 o-grid__cell--offset-80">
+        <button type="button" class="edit-notes c-button u-medium">
+          <i class="fa-solid fa-pencil fa-sm"></i>
+          <span>Edit</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+

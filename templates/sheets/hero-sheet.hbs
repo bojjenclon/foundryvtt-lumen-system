@@ -219,9 +219,11 @@
       </div>
     </div>
 
-    <div class="notes pb-4">
+    {{#unless (empty notesHTML)}}
+    <div class="system-notes mx-4 pb-4">
       {{{notesHTML}}}
     </div>
+    {{/unless}}
 
     <div class="note-actions">
       <div class="o-grid">

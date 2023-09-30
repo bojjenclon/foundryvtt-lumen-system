@@ -34,6 +34,20 @@ export default class LumenItemSheet extends ItemSheet {
     
     if (tags) {
       html
+        .find('.tag-badge')
+        .click(evt => {
+          evt.preventDefault()
+
+          const el = evt.currentTarget
+          const tagId = el.dataset.id
+          const tagItem = game.items.find(gi => gi.id === tagId)
+          
+          if (tagItem) {
+            tagItem.sheet.render(true)
+          }
+        })
+
+      html
         .find('.add-tag')
         .click(async (evt) => {
           evt.preventDefault()

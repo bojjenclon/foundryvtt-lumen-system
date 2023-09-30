@@ -98,6 +98,10 @@ input.p-2 {
   padding-right: 0.25rem;
 }
 
+.pr-2 {
+  padding-right: 0.5rem;
+}
+
 .pb-2 {
   padding-bottom: 0.5rem;
 }
@@ -133,6 +137,10 @@ input.p-2 {
   padding-bottom: 0.25rem;
 }
 
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
 .mb-2 {
   margin-bottom: 0.5rem;
 }
@@ -165,6 +173,11 @@ input.p-2 {
 .my-0 {
   margin-top: 0;
   margin-bottom: 0;
+}
+
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .m-1 {
@@ -226,9 +239,23 @@ input.align-right {
   width: auto;
 }
 
-.notes {
+.system-notes {
   max-height: 24rem;
   overflow: auto;
+}
+
+.simple-text-editor .window-content {
+  gap: 0.5rem;
+}
+
+.simple-text-editor .dialog-content {
+  display: flex;
+  padding: 0.25rem;
+}
+
+.simple-text-editor .dialog-buttons {
+  display: flex;
+  flex: 0;
 }
 
 .essence-dialog {

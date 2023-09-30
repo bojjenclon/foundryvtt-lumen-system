@@ -2,6 +2,8 @@ import { lumen } from './config.mjs'
 import { registerGameSettings } from './settings.mjs'
 import Essence from './helpers/essence.mjs'
 import LumenHeroSheet from './sheets/LumenHeroSheet.mjs'
+import LumenCharacterSheet from './sheets/LumenCharacterSheet.mjs'
+import LumenEnemySheet from './sheets/LumenEnemySheet.mjs'
 import LumenItemSheet from './sheets/LumenItemSheet.mjs'
 
 export class LumenSystem {
@@ -21,6 +23,20 @@ export class LumenSystem {
       {
         makeDefault: true,
         types: ["hero"]
+      }
+    )
+    Actors.registerSheet(
+      LumenSystem.SYSTEM,
+      LumenCharacterSheet,
+      {
+        types: ["character"]
+      }
+    )
+    Actors.registerSheet(
+      LumenSystem.SYSTEM,
+      LumenEnemySheet,
+      {
+        types: ["enemy"]
       }
     )
 
@@ -45,6 +61,8 @@ export class LumenSystem {
     Handlebars.registerHelper('contains', (arr, val) => {
       return arr.includes(val)
     })
+
+    Handlebars.registerHelper('empty', str => !str.length)
 
     Handlebars.registerHelper('face', value => {
       switch (value) {
