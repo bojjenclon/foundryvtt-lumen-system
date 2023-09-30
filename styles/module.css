@@ -41,6 +41,12 @@ input[type="number"].u-xlarge {
   padding-bottom: 0.4rem;
 }
 
+.c-badge.c-badge--disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: var(--disabled-opacity);
+}
+
 .u-flex-0 {
   flex: 0;
 }

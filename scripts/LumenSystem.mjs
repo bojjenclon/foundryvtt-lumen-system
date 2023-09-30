@@ -99,6 +99,20 @@ export class LumenSystem {
       return game.items.filter(gi => ids.includes(gi.id)).map(gi => gi.name)
     })
 
+    Handlebars.registerHelper('isAtMax', (userId, prop) => {
+      const user = game.users.get(userId)
+      if (!user) {
+        return true
+      }
+
+      const { character } = user
+      if (!character) {
+        return true
+      }
+
+      return getProperty(character, `system.${prop}.value`) === getProperty(character, `system.${prop}.max`)
+    })
+
     Handlebars.registerHelper('claimedByAny', ess => {
       return Object.values(ess.claimed).some(v => !!v)
     })
@@ -321,6 +335,16 @@ export class LumenSystem {
             }
             const propPath = `system.${essProp}.value`
             await character.update({ [propPath]: getProperty(character, propPath) + 1 })
+            
+            ChatMessage.create({
+              content: [
+               `<p class="u-paragraph">`,
+                `<span class="u-text--loud">${character.name}</span> `,
+                `acquired `,
+                `<span class="u-text--loud">${ess.name}</span>`,
+               `</p>` 
+              ].join('')
+            })
   
             LumenSystem.removeEssence(idx)
           }

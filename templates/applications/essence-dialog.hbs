@@ -10,7 +10,7 @@
       <div class="content u-display-flex u-flex-wrap">
         {{#each essence as |ess|}}
           {{#if ess.is.health}}
-          <a class="c-badge c-badge--error u-large m-1 {{#if (claimedByAny ess)}}claimed{{/if}}" title="{{ess.name}}" data-idx="{{@index}}" data-type="health">
+          <a class="c-badge c-badge--error {{#if (isAtMax ../userId "health")}}c-badge--disabled{{/if}} u-large m-1 {{#if (claimedByAny ess)}}claimed{{/if}}" title="{{ess.name}}" data-idx="{{@index}}" data-type="health">
             {{#if (claimedByUser ess ../userId)}}
             <i class="fa-solid fa-heart fa-fw fa-2x fa-beat" style="--fa-animation-duration: 2.25s; --fa-beat-scale: 1.2;"></i>
             {{^}}
@@ -20,7 +20,7 @@
           {{/if}}
 
           {{#if ess.is.energy}}
-          <a class="c-badge c-badge--warning u-large m-1 {{#if (claimedByAny ess)}}claimed{{/if}}" title="{{ess.name}}" data-idx="{{@index}}" data-type="energy">
+          <a class="c-badge c-badge--warning {{#if (isAtMax ../userId "energy")}}c-badge--disabled{{/if}} u-large m-1 {{#if (claimedByAny ess)}}claimed{{/if}}" title="{{ess.name}}" data-idx="{{@index}}" data-type="energy">
             {{#if (claimedByUser ess ../userId)}}
             <i class="fa-solid fa-bolt fa-fw fa-2x fa-beat" style="--fa-animation-duration: 2.25s; --fa-beat-scale: 1.2;"></i>
             {{^}}

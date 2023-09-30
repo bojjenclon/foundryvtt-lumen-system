@@ -180,7 +180,9 @@ export default class LumenHeroSheet extends ActorSheet {
              `<p class="u-paragraph align-center">`,
               `<i class="fa-solid fa-bolt"></i> `,
               `<span class="u-text--loud">${actor.name}</span> `,
-              `burns ${powerCost} Energy to use `,
+              `burns ${powerCost} `,
+              `<span class="u-text--loud">Energy</span> `,
+              `to use `,
               `<span class="u-text--loud">${powerName}</span> `,
               `<i class="fa-solid fa-bolt"></i>`,
              `</p>` 
