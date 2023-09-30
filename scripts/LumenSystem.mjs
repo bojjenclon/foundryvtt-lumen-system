@@ -282,6 +282,10 @@ export class LumenSystem {
       .find('.apply-essence')
       .click(async (evt) => {
         evt.preventDefault()
+        
+        if (!game.user.isGM) {
+          return
+        }
   
         const clientStorage = game.settings.storage.get('client')
         const essence = JSON.parse(clientStorage.getItem('essence') || '[]')
@@ -330,13 +334,7 @@ export class LumenSystem {
             }
           }
           
-          const percent = 1.0 / randoIds.length
-          for (let id of randoIds) {
-            if (Math.random() < percent) {
-              addEssence(id)
-              break
-            }
-          }
+          addEssence(randoIds[Math.floor(Math.random() * randoIds.length)])
         }
       })
   }
