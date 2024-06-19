@@ -33,6 +33,7 @@ const createDialog = async () => {
       if (character) {
         const propPath = `system.${type}.value`
 
+        const { getProperty } = foundry.utils
         const curVal = getProperty(character, propPath)
         const maxVal = getProperty(character, `system.${type}.max`)
 

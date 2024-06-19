@@ -110,6 +110,7 @@ export class LumenSystem {
         return true
       }
 
+      const { getProperty } = foundry.utils
       return getProperty(character, `system.${prop}.value`) === getProperty(character, `system.${prop}.max`)
     })
 
@@ -181,6 +182,8 @@ export class LumenSystem {
       const clientStorage = game.settings.storage.get('client')
       const essence = JSON.parse(clientStorage.getItem('essence') || '[]')
       const propPath = `${idx}.claimed.${userId}`;
+
+      const { getProperty, setProperty } = foundry.utils
       setProperty(essence, propPath, !getProperty(essence, propPath))
       clientStorage.setItem('essence', JSON.stringify(essence))
 
@@ -337,7 +340,7 @@ export class LumenSystem {
               essProp = 'energy'
             }
             const propPath = `system.${essProp}.value`
-            await character.update({ [propPath]: getProperty(character, propPath) + 1 })
+            await character.update({ [propPath]: foundry.utils.getProperty(character, propPath) + 1 })
             
             ChatMessage.create({
               content: [
