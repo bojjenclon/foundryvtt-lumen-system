@@ -101,19 +101,19 @@ export default class LumenHeroSheet extends ActorSheet {
     html
       .find('.roll-force')
       .click(() => {
-        performRoll(actor.system.force, 'Force')
+        performRoll(actor.system.approaches.force, 'Force')
       })
 
     html
       .find('.roll-flow')
       .click(() => {
-        performRoll(actor.system.flow, 'Flow')
+        performRoll(actor.system.approaches.flow, 'Flow')
       })
 
     html
       .find('.roll-focus')
       .click(() => {
-        performRoll(actor.system.focus, 'Focus')
+        performRoll(actor.system.approaches.focus, 'Focus')
       })
     
     html
