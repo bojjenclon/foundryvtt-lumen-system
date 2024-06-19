@@ -339,20 +339,30 @@ export class LumenSystem {
             } else if (ess.is.energy) {
               essProp = 'energy'
             }
+
             const propPath = `system.${essProp}.value`
-            await character.update({ [propPath]: foundry.utils.getProperty(character, propPath) + 1 })
-            
-            ChatMessage.create({
-              content: [
-               `<p class="u-paragraph">`,
-                `<span class="u-text--loud">${character.name}</span> `,
-                `acquired `,
-                `<span class="u-text--loud">${ess.name}</span>`,
-               `</p>` 
-              ].join('')
-            })
-  
-            LumenSystem.removeEssence(idx)
+            const propMaxPath = `system.${essProp}.max`
+
+            const { getProperty } = foundry.utils
+            const curVal = getProperty(character, propPath)
+            const maxVal = getProperty(character, propMaxPath)
+
+            if (curVal < maxVal) {
+              await character.update({ [propPath]: curVal + 1 })
+              ChatMessage.create({
+                content: [
+                `<p class="u-paragraph">`,
+                  `<span class="u-text--loud">${character.name}</span> `,
+                  `acquired `,
+                  `<span class="u-text--loud">${ess.name}</span>`,
+                `</p>` 
+                ].join('')
+              })
+
+              LumenSystem.removeEssence(idx)
+            } else {
+              LumenSystem.toggleClaimOnEssence(idx, game.user.id)
+            }
           }
           
           let randoIds = []
