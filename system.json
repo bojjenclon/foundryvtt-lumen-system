@@ -41,10 +41,6 @@
       {
         "id": "lib-wrapper",
         "type": "module"
-      },
-      {
-        "id": "lumen-socket",
-        "type": "module"
       }
     ]
   },

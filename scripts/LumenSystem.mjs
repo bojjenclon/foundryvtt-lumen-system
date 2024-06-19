@@ -177,6 +177,24 @@ export class LumenSystem {
 
       Essence.showDialog()
     })
+
+    socket.register('unclaimAllEssence', () => {
+      const { getProperty, setProperty } = foundry.utils
+
+      const clientStorage = game.settings.storage.get('client')
+      const essence = JSON.parse(clientStorage.getItem('essence') ?? '[]')
+
+      Object.keys(essence).forEach((key) => {
+        const users = getProperty(essence, `${key}.claimed`);
+        Object.keys(users).forEach((userId) => {
+          setProperty(users, userId, false);
+        })
+      })
+
+      clientStorage.setItem('essence', JSON.stringify(essence))
+
+      Essence.refreshDialog()
+    })
     
     socket.register('toggleClaimOnEssence', (idx, userId) => {
       const clientStorage = game.settings.storage.get('client')
@@ -360,8 +378,6 @@ export class LumenSystem {
               })
 
               LumenSystem.removeEssence(idx)
-            } else {
-              LumenSystem.toggleClaimOnEssence(idx, game.user.id)
             }
           }
           
@@ -376,12 +392,19 @@ export class LumenSystem {
           
           addEssence(randoIds[Math.floor(Math.random() * randoIds.length)])
         }
+        
+        LumenSystem.unclaimAllEssence()
       })
   }
   
   static addEssence(type, amount) {
     const { socket } = LumenSystem 
     socket.executeForEveryone('addEssence', type, amount)
+  }
+  
+  static unclaimAllEssence() {
+    const { socket } = LumenSystem 
+    socket.executeForEveryone('unclaimAllEssence')
   }
 
   static toggleClaimOnEssence(idx, userId) {
