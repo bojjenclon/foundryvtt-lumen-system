@@ -6,7 +6,7 @@ export default class EssenceDialog extends Application {
   }
   
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
         id: 'essence-dialog',
         title: 'Essence',
         template: 'systems/lumen/templates/applications/essence-dialog.hbs',

@@ -5,7 +5,7 @@ import Editor from '../helpers/editor.mjs'
 
 export default class LumenEnemySheet extends ActorSheet {
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       template: `systems/lumen/templates/sheets/enemy-sheet.hbs`,
       classes: [ LumenSystem.SYSTEM, 'sheet', 'enemy' ]
     });

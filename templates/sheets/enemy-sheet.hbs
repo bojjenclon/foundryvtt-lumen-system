@@ -138,13 +138,13 @@
     <div class="c-card__body">
       <div class="o-grid {{#unless (empty attack.tags)}}pb-3{{/unless}}">
         <div class="o-grid__cell align-left">
-          <span class="c-tooltip c-tooltip--bottom" aria-label="Harm">
+          <span class="c-tooltip c-tooltip--right" aria-label="Harm">
             <i class="fa-solid fa-sword"></i><span class="pl-1"> {{attack.harm}}</span>
           </span>
         </div>
 
         <div class="o-grid__cell align-center">
-          <span class="c-tooltip c-tooltip--bottom" aria-label="Range">
+          <span class="c-tooltip c-tooltip--right" aria-label="Range">
             {{#if attack.range.near}}
             <span class="c-badge c-badge--info">Near</span>
             {{/if}}

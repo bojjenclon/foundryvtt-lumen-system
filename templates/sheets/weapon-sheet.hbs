@@ -95,7 +95,7 @@
   <div class="o-grid o-grid--wrap mb-2">
     {{#each data.system.tags as |tag|}}
       <div class="o-grid__cell">
-        <div class="c-badge u-large">{{tag.name}}</div>
+        <div class="tag-badge c-badge u-large" data-id="{{tag.id}}">{{tag.name}}</div>
       </div>
     {{/each}}
   </div>

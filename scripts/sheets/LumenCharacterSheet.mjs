@@ -3,7 +3,7 @@ import Editor from '../helpers/editor.mjs'
 
 export default class LumenCharacterSheet extends ActorSheet {
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       template: `systems/lumen/templates/sheets/character-sheet.hbs`,
       classes: [ LumenSystem.SYSTEM, 'sheet', 'character' ]
     });

@@ -4,8 +4,8 @@
   "description": "Basic implementation of the LUMEN game system by Spencer Campbell.",
   "version": "#{VERSION}#",
   "compatibility": {
-    "minimum": 10,
-    "verified": 11,
+    "minimum": 12,
+    "verified": 12,
     "maximum": 12
   },
   "authors": [
@@ -41,8 +41,16 @@
       {
         "id": "lib-wrapper",
         "type": "module"
+      },
+      {
+        "id": "lumen-socket",
+        "type": "module"
       }
     ]
+  },
+  "grid": {
+	  "distance": 5,
+	  "units": "ft"
   },
   "url": "#{URL}#",
   "manifest": "#{MANIFEST}#",
@@ -50,8 +58,6 @@
   "socket": true,
   "license": "LICENSE",
   "readme": "README.md",
-  "gridDistance": 5,
-  "gridUnits": "ft",
   "primaryTokenAttribute": "resources.health",
   "secondaryTokenAttribute": "resources.energy"
 }

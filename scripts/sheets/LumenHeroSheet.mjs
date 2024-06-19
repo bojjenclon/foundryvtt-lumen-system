@@ -3,7 +3,7 @@ import Editor from '../helpers/editor.mjs'
 
 export default class LumenHeroSheet extends ActorSheet {
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       template: `systems/lumen/templates/sheets/hero-sheet.hbs`,
       classes: [ LumenSystem.SYSTEM, 'sheet', 'hero' ]
     });
@@ -78,8 +78,7 @@ export default class LumenHeroSheet extends ActorSheet {
     const { actor } = this
     
     const performRoll = async (dieCount, approach) => {
-      const result = await new Roll(`${dieCount}d6kh`, {})
-        .evaluate({ 'async': true })
+      const result = await (new Roll(`${dieCount}d6kh`, {}).evaluate())
       const { terms, total } = result
       const dice = terms[0].results
 

@@ -246,11 +246,11 @@
         <div class="o-grid">
           <div class="o-grid__cell align-left">
             {{#if power.system.passive}}
-            <span class="u-text--quiet c-tooltip c-tooltip--bottom" aria-label="Passive">
+            <span class="u-text--quiet c-tooltip c-tooltip--right" aria-label="Passive">
               <i class="fa-solid fa-moon pr-1"></i>
             </span>
             {{^}}
-            <span class="u-text--quiet c-tooltip c-tooltip--bottom" aria-label="Active">
+            <span class="u-text--quiet c-tooltip c-tooltip--right" aria-label="Active">
               <i class="fa-solid fa-sun pr-1"></i>
             </span>
             {{/if}}
@@ -331,25 +331,25 @@
       <div class="c-card__body">
         <div class="o-grid pb-3">
           <div class="o-grid__cell align-center">
-            <span class="c-tooltip c-tooltip--bottom" aria-label="Quantity">
+            <span class="c-tooltip c-tooltip--right" aria-label="Quantity">
               <i class="fa-solid fa-hashtag"></i><span> {{weapon.system.quantity}}</span>
             </span>
           </div>
 
           <div class="o-grid__cell align-center">
-            <span class="c-tooltip c-tooltip--bottom" aria-label="Value">
+            <span class="c-tooltip c-tooltip--right" aria-label="Value">
               <i class="fa-solid fa-coins"></i><span class="pl-1"> {{weapon.system.value}}</span>
             </span>
           </div>
 
           <div class="o-grid__cell align-center">
-            <span class="c-tooltip c-tooltip--bottom" aria-label="Harm">
+            <span class="c-tooltip c-tooltip--left" aria-label="Harm">
               <i class="fa-solid fa-sword"></i><span class="pl-1"> {{weapon.system.harm}}</span>
             </span>
           </div>
 
           <div class="o-grid__cell align-center">
-            <span class="c-tooltip c-tooltip--bottom" aria-label="Range">
+            <span class="c-tooltip c-tooltip--left" aria-label="Range">
               {{#if weapon.system.range.near}}
               <span class="c-badge c-badge--info">Near</span>
               {{/if}}
@@ -409,13 +409,13 @@
       <div class="c-card__body">
         <div class="o-grid pb-2">
           <div class="o-grid__cell align-center">
-            <span class="c-tooltip c-tooltip--bottom" aria-label="Quantity">
+            <span class="c-tooltip c-tooltip--right" aria-label="Quantity">
               <i class="fa-solid fa-hashtag"></i><span> {{gear.system.quantity}}</span>
             </span>
           </div>
 
           <div class="o-grid__cell align-center">
-            <span class="c-tooltip c-tooltip--bottom" aria-label="Value">
+            <span class="c-tooltip c-tooltip--right" aria-label="Value">
               <i class="fa-solid fa-coins"></i><span class="pl-1"> {{gear.system.value}}</span>
             </span>
           </div>
